@@ -3,15 +3,16 @@ import '~/assets/css/tailwind.css';
 
 const title = ref('Joe McBroom');
 const router = useRouter();
+const route = useRoute();
 
-router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
-    title.value = to.meta.title;
-  } else {
-    title.value = 'Joe McBroom';
-  }
-  next();
-});
+// router.beforeEach((to, _, next) => {
+//   if (to.meta.title) {
+//     title.value = to.meta.title;
+//   } else {
+//     title.value = 'Joe McBroom';
+//   }
+//   next();
+// });
 
 useHead({
   title: computed(() => title.value),
@@ -21,6 +22,7 @@ useHead({
       content: 'width=device-width, initial-scale=1',
     },
   ],
+  link: [{ rel: 'icon', type: 'image/png', href: '/img/favicon-32x32.png' }],
 });
 
 const isDark = useDarkMode();
@@ -32,13 +34,17 @@ onMounted(() => {
       window.matchMedia('(prefers-color-scheme: dark)').matches);
   isDark.value = prefersDark;
 });
+
+watchEffect(() => {
+  title.value = `${route.meta.title} - Joe McBroom` || 'Joe McBroom';
+});
 </script>
 <template>
-  <div :class="isDark ? 'dark' : ''">
+  <div class="min-h-screen flex flex-col">
+    <NavBar />
     <main
-      class="min-h-screen bg-sky-100 dark:bg-sky-800 text-sky-800 dark:text-sky-100 text-sm sm:text-lg"
+      class="bg-sky-100 dark:bg-sky-800 text-sky-800 dark:text-sky-100 text-sm sm:text-lg flex-grow"
     >
-      <NavBar />
       <NuxtPage />
     </main>
   </div>

@@ -11,7 +11,7 @@ const navPages = [
 
 <template>
   <nav
-    class="w-full flex flex-wrap gap-4 px-2 py-3 justify-between items-center bg-sky-50 dark:bg-sky-900"
+    class="w-full flex flex-wrap gap-4 px-2 py-3 justify-between items-center text-sky-800 dark:text-sky-100 bg-sky-50 dark:bg-sky-900"
   >
     <div class="mr-auto flex items-center gap-1">
       <img src="/img/logo.png" alt="Joe McBroom Logo" class="w-10" />

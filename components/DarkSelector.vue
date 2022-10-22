@@ -11,6 +11,14 @@ const setDarkMode = value => {
 let imagePath = computed(() => {
   return isDark.value ? sunUrl : moonUrl;
 });
+
+watchEffect(() => {
+  useHead({
+    htmlAttrs: {
+      class: isDark.value ? 'dark' : '',
+    },
+  });
+});
 </script>
 
 <template>
